@@ -10,7 +10,7 @@
     $pdo = new PDO('pgsql:host=localhost;dbname=datos', 'datos', 'datos');
     $stmt = $pdo->query('SELECT *
                            FROM departamentos
-                       ORDER BY codigo');
+                       ORDER BY codigo');;;;
     ?>
     <table border="1">
         <thead>
