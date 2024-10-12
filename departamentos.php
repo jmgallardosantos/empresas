@@ -7,11 +7,28 @@
 </head>
 <body>
     <?php
-    $pdo = new PDO('pgsql:host=localhost;dbname=datos', 'datos', 'datos');
+    require 'auxiliar.php';
+
+    $denominacion = obtener_get('denominacion');
+    $pdo = conectar();
+
+    if ($denominacion == null || $denominacion == '') {
+        $where = 'true';
+        $execute = [];
+    } else {
+        $where = "denominacion ILIKE :denominacion";
+        $execute = [':denominacion' => "%$denominacion%"];
+    }
     $stmt = $pdo->query('SELECT *
                            FROM departamentos
-                       ORDER BY codigo');;;;
+                       ORDER BY codigo')
     ?>
+    <form action="" method="get">
+        <label>Denominación:
+            <input type="text" name="denominacion" value="<?= $denominacion ?>">
+        </label>
+        <button type="submit">Buscar</button>
+    </form>
     <table border="1">
         <thead>
             <th>Código</th>
